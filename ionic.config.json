@@ -1,0 +1,7 @@
+{
+  "name": "mad-project",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
