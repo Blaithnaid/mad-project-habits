@@ -22,25 +22,31 @@ export class HabitsPage {
   // new habit object from model
   habitToBeAdded = new Habit(0, '', '', 0, 0, new Date(), '');
 
+  // boolean to check if the modal is for editing
+  isEditing = false;
+
+  openNewModal() {
+    this.habitToBeAdded = new Habit(0, '', '', 0, 0, new Date(), ''); // reset the habit to be added
+    this.modal.present(); // open the modal
+  }
+
   cancelModal() { // close the modal
     this.modal.dismiss();
   }
 
-  confirmModal() {
-    this.addHabit();
-    this.modal.dismiss();
-  }
-
-  addHabit() {
-    // set the id of the new habit
-    this.habitToBeAdded.id = this.habits.length;
-    // add the new habit to the array
-    this.habits.push(this.habitToBeAdded);
-    // close the modal
-    this.modal.dismiss();
-    // save the habits to local storage
-    localStorage.setItem('habits', JSON.stringify(this.habits));
-    console.log(this.habits);
+  confirmModalAddHabit() { // close the modal and add the habit
+    if (this.isEditing) {
+      let habit = this.habits.find(habit => habit.id === this.habitToBeAdded.id);
+      if (habit) {
+        // use object.assign to update habit in array to the edited habit
+        Object.assign(habit, this.habitToBeAdded);
+      }
+    } else {
+      // set the id of the new habit
+      this.habitToBeAdded.id = this.habits.length + 1;
+      // add the new habit to the array
+      this.habits.push(this.habitToBeAdded);
+    }
   }
 
   deleteHabit(id: number) {
@@ -50,6 +56,16 @@ export class HabitsPage {
     localStorage.setItem('habits', JSON.stringify(this.habits));
   }
 
+  editHabit(id: number) {
+    // set the isEditing to true
+    this.isEditing = true;
+    // get the habit to be edited
+    let habit = this.habits.find(habit => habit.id === id);
+    // set the habit to the habit to be edited or assign a default value
+    this.habitToBeAdded = habit || new Habit(0, '', '', 0, 0, new Date(), '');
+    // open the modal
+    this.modal.present();
+  }
   constructor() {
     // get the habits from local storage, else set to empty array
     // let habits = localStorage.getItem('habits') || '[]';
