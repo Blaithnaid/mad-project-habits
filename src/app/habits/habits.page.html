@@ -1,15 +1,13 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Habits
-    </ion-title>
+    <ion-title>Habits List</ion-title>
+    <ion-buttons slot="primary" id="open-create-habit">
+      <ion-button> New </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Habits</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-modal trigger="open-create-habit">
+    <app-create-habit></app-create-habit>
+  </ion-modal>
 </ion-content>
