@@ -16,29 +16,29 @@
           </ion-buttons>
           <ion-title>Welcome</ion-title>
           <ion-buttons slot="end">
-            <ion-button [strong]="true">Confirm</ion-button>
+            <ion-button [strong]="true" (click)="confirmModal()">Confirm</ion-button>
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
-      <ion-content class="ion-padding">
+      <ion-content>
         <form #habitForm="ngForm">
           <ion-item>
             <ion-label position="stacked">Habit Name</ion-label>
-            <ion-input placeholder="E.g. 'Study french'!" type="text" [(ngModel)]="newHabit.name"></ion-input>
+            <ion-input name="name" placeholder="E.g. 'Study french'!" type="text" [(ngModel)]="habitToBeAdded.name"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label position="stacked">Description</ion-label>
-            <ion-textarea placeholder="What do you want to achieve?" [(ngModel)]="newHabit.description"></ion-textarea>
+            <ion-textarea name="description" placeholder="What do you want to achieve?" [(ngModel)]="habitToBeAdded.description"></ion-textarea>
           </ion-item>
           <ion-item>
             <ion-label position="stacked">Goal (Number of days)</ion-label>
-            <ion-input placeholder="Number of days..." type="number" [(ngModel)]="newHabit.goal"></ion-input>
+            <ion-input name="goal" placeholder="Number of days..." type="number" [(ngModel)]="habitToBeAdded.goal"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label position="stacked">Category</ion-label>
-            <ion-select placeholder="Select a category" [(ngModel)]="newHabit.category">
+            <ion-select name="category" placeholder="Select a category" [(ngModel)]="habitToBeAdded.category">
               @for (category of categories; track category) {
-                <ion-select-option [value]="category">{{ category }}</ion-select-option>
+              <ion-select-option [value]="category">{{ category }}</ion-select-option>
               }
             </ion-select>
           </ion-item>
@@ -46,18 +46,28 @@
       </ion-content>
     </ng-template>
   </ion-modal>
-  <!-- <ion-list>
-    <ion-item-sliding *ngFor="let habit of habits">
-      <ion-item>
-        <ion-label>
-          <h2>{{ habit.name }}</h2>
-          <p>{{ habit.description }}</p>
-        </ion-label>
-      </ion-item>
-      <ion-item-options side="end">
-        <ion-item-option color="danger" (click)="deleteHabit(habit.id)">
-          <ion-icon slot="icon-only" name="trash"></ion-icon>
-        </ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding> -->
+  <ion-list>
+    @if (habits.length === 0) {
+    <ion-item>
+      <ion-label>
+        <h2>No habits yet!</h2>
+        <p>Click on the 'New' button to create a new habit!</p>
+      </ion-label>
+    </ion-item>
+    } @else {
+      @for (habit of habits; track habit) {
+        <ion-item-sliding id="{{ habit.id }}trigger">
+          <ion-item>
+            <ion-label>
+              <h2>{{ habit.name }}</h2>
+              <p>{{ habit.description }}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item-options>
+            <ion-item-option color="danger" (click)="deleteHabit(habit.id)">Delete</ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      }
+    }
+  </ion-list>
 </ion-content>
