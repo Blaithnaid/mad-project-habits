@@ -9,7 +9,7 @@ export class QuotesAPIService {
 
   constructor(private http: HttpClient) { }
   // set the URLs for the API
-  randomurl: string = 'https://zenquotes.io/api/random';
+  randomurl: string = 'https://api.quotable.io/random';
   dailyurl: string = 'https://zenquotes.io/api/today';
 
   getQuote(mode: string): Observable<any> {

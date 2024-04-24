@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardContent, IonCardSubtitle, IonCardTitle } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardContent, IonCardSubtitle, IonCardTitle, IonButtons, IonButton } from '@ionic/angular/standalone';
 import { QuotesAPIService } from '../quotes-api.service';
 
 @Component({
@@ -7,7 +7,8 @@ import { QuotesAPIService } from '../quotes-api.service';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: true,
-  imports: [IonCardTitle, IonCard, IonHeader, IonToolbar, IonTitle, IonContent, IonCardHeader, IonCardContent, IonCardSubtitle]
+  imports: [IonCardTitle, IonCard, IonHeader, IonToolbar, IonTitle, IonContent, IonCardHeader, IonCardContent, IonCardSubtitle, IonButtons, IonButton
+  ]
 })
 export class HomePage {
   constructor(private quotesAPI: QuotesAPIService) {
@@ -15,15 +16,17 @@ export class HomePage {
   }
 
   // set the initial mode to 'daily'
-  mode: string = 'daily';
+  mode: string = 'random';
 
   dailyQuoteText: any;
   dailyQuoteAuthor: any;
 
   ngOnInit() {
     this.quotesAPI.getQuote(this.mode).subscribe(data => {
-      this.dailyQuoteText = data.q;
-      this.dailyQuoteAuthor = data.a;
+      // this API is down at the moment
+      // this.dailyQuoteText = data.q;
+      this.dailyQuoteAuthor = data.author;
+      this.dailyQuoteText = data.content
     });
   }
 }
