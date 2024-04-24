@@ -15,14 +15,12 @@ export class HomePage {
     this.quotesAPI = quotesAPI;
   }
 
-  // set the initial mode to 'daily'
-  mode: string = 'random';
 
   dailyQuoteText: any;
   dailyQuoteAuthor: any;
 
   ngOnInit() {
-    this.quotesAPI.getQuote(this.mode).subscribe(data => {
+    this.quotesAPI.getQuote().subscribe(data => {
       // this API is down at the moment
       // this.dailyQuoteText = data.q;
       this.dailyQuoteAuthor = data.author;
