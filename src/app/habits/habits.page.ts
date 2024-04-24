@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonButtons, IonButton, IonModal, IonItem, IonLabel, IonInput, IonTextarea, IonSelect, IonSelectOption, ModalController, IonList, IonItemSliding } from '@ionic/angular/standalone';
 import { HabitComponent } from '../habit/habit.component';
 import { Habit } from '../habit/habit.model';
@@ -12,11 +12,12 @@ import { Habit } from '../habit/habit.model';
   imports: [IonItemSliding, IonList, HabitComponent, FormsModule, IonTextarea, IonInput, IonModal, IonButton, IonButtons, IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonLabel, IonSelect, IonSelectOption]
 })
 export class HabitsPage {
-  @ViewChild(IonModal) modal: IonModal;
+  @ViewChild(IonModal) modal: IonModal; // get the modal component
 
-  habits: Array<HabitComponent>;
+  habits: Array<HabitComponent>; // array of habits
 
-  // newHabit: Habit;
+  // categories for the select input
+  categories = ['Health', 'Finance', 'Career', 'Personal Growth', 'Relationships', 'Other'];
   newHabit = {
     id: 0,
     name: '',
@@ -25,11 +26,10 @@ export class HabitsPage {
     goal: 0,
     current: 0,
     deadline: new Date(),
-    picture: '',
     category: ''
   };
 
-  cancelModal() {
+  cancelModal() { // close the modal
     this.modal.dismiss();
   }
 
