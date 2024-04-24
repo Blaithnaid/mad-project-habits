@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonButtons, IonButton, IonModal, IonItem, IonLabel, IonInput, IonTextarea, IonSelect, IonSelectOption, ModalController, IonList, IonItemSliding, IonDatetimeButton, IonPopover, IonItemOptions, IonItemOption, IonIcon } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonButtons, IonButton, IonModal, IonItem, IonLabel, IonInput, IonTextarea, IonSelect, IonSelectOption, ModalController, IonList, IonItemSliding, IonDatetimeButton, IonPopover, IonItemOptions, IonItemOption, IonIcon, IonAvatar } from '@ionic/angular/standalone';
 import { HabitComponent } from '../habit/habit.component';
 import { Habit } from '../habit/habit.model';
 
@@ -9,7 +9,7 @@ import { Habit } from '../habit/habit.model';
   templateUrl: 'habits.page.html',
   styleUrls: ['habits.page.scss'],
   standalone: true,
-  imports: [IonIcon, IonItemOption, IonItemOptions, IonPopover, IonDatetimeButton, IonItemSliding, IonList, HabitComponent, FormsModule, IonTextarea, IonInput, IonModal, IonButton, IonButtons, IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonLabel, IonSelect, IonSelectOption]
+  imports: [IonAvatar, IonIcon, IonItemOption, IonItemOptions, IonPopover, IonDatetimeButton, IonItemSliding, IonList, HabitComponent, FormsModule, IonTextarea, IonInput, IonModal, IonButton, IonButtons, IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonLabel, IonSelect, IonSelectOption]
 })
 export class HabitsPage {
   @ViewChild(IonModal) modal: IonModal; // get the modal component
@@ -18,6 +18,15 @@ export class HabitsPage {
 
   // categories for the select input
   categories = ['Health', 'Finance', 'Career', 'Personal Growth', 'Relationships', 'Other'];
+
+  categoryToPicture: { [key: string]: string } = {
+    'Health': './assets/health.jpeg',
+    'Finance': './assets/finance.jpeg',
+    'Career': './assets/career.jpeg',
+    'Personal Growth': './assets/personal-growth.jpeg',
+    'Relationships': './assets/relationships.jpeg',
+    'Other': './assets/other.jpeg'
+  }
 
   // new habit object from model
   habitToBeAdded = new Habit(0, '', '', 0, 0, new Date(), '');
@@ -47,6 +56,14 @@ export class HabitsPage {
       // add the new habit to the array
       this.habits.push(this.habitToBeAdded);
     }
+    // close modal
+    this.modal.dismiss();
+    // save the habits to local storage
+    localStorage.setItem('habits', JSON.stringify(this.habits));
+    console.log(this.habits);
+    // reset the isEditing to false and the habit to be added
+    this.isEditing = false;
+    this.habitToBeAdded = new Habit(0, '', '', 0, 0, new Date(), '');
   }
 
   deleteHabit(id: number) {
