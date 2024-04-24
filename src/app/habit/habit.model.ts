@@ -3,9 +3,9 @@ export class Habit {
     name: string;
     description: string;
     goal: number;
+    category: string;
     current: number;
     deadline: Date;
-    category: string;
     constructor(id: number, name: string, description: string, goal: number, current: number, deadline: Date, category: string) {
         this.id = id;
         this.name = name;
