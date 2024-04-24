@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonButtons, IonButton, IonModal, IonItem, IonLabel, IonInput, IonTextarea, IonSelect, IonSelectOption, ModalController } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonButtons, IonButton, IonModal, IonItem, IonLabel, IonInput, IonTextarea, IonSelect, IonSelectOption, ModalController, IonList, IonItemSliding } from '@ionic/angular/standalone';
 import { HabitComponent } from '../habit/habit.component';
 import { Habit } from '../habit/habit.model';
 
@@ -9,7 +9,7 @@ import { Habit } from '../habit/habit.model';
   templateUrl: 'habits.page.html',
   styleUrls: ['habits.page.scss'],
   standalone: true,
-  imports: [HabitComponent, FormsModule, IonTextarea, IonInput, IonModal, IonButton, IonButtons, IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonLabel, IonSelect, IonSelectOption]
+  imports: [IonItemSliding, IonList, HabitComponent, FormsModule, IonTextarea, IonInput, IonModal, IonButton, IonButtons, IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonLabel, IonSelect, IonSelectOption]
 })
 export class HabitsPage {
   @ViewChild(IonModal) modal: IonModal;
@@ -21,10 +21,12 @@ export class HabitsPage {
     id: 0,
     name: '',
     description: '',
+    frequency: '',
     goal: 0,
     current: 0,
     deadline: new Date(),
-    picture: ''
+    picture: '',
+    category: ''
   };
 
   cancelModal() {
