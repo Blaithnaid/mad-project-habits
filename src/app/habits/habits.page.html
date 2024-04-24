@@ -8,6 +8,28 @@
 </ion-header>
 <ion-content [fullscreen]="true">
   <ion-modal trigger="open-create-habit">
-    <app-habit></app-habit>
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="cancelModal()">Cancel</ion-button>
+          </ion-buttons>
+          <ion-title>Welcome</ion-title>
+          <ion-buttons slot="end">
+            <ion-button [strong]="true">Confirm</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-item>
+          <ion-label position="floating">Habit Name</ion-label>
+          <ion-input type="text" [(ngModel)]="newHabit.name"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Description</ion-label>
+          <ion-textarea [(ngModel)]="newHabit.description"></ion-textarea>
+        </ion-item>
+      </ion-content>
+    </ng-template>
   </ion-modal>
 </ion-content>
