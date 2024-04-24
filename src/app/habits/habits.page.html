@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Habits List</ion-title>
-    <ion-buttons slot="primary" id="open-create-habit">
+    <ion-buttons slot="primary" (click)="openNewModal()">
       <ion-button> New </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -16,7 +16,7 @@
           </ion-buttons>
           <ion-title>Welcome</ion-title>
           <ion-buttons slot="end">
-            <ion-button [strong]="true" (click)="confirmModal()">Confirm</ion-button>
+            <ion-button [strong]="true" (click)="confirmModalAddHabit()">Confirm</ion-button>
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
@@ -65,6 +65,7 @@
           </ion-item>
           <ion-item-options>
             <ion-item-option color="danger" (click)="deleteHabit(habit.id)">Delete</ion-item-option>
+            <ion-item-option color="primary" (click)="editHabit(habit.id)">Edit</ion-item-option>
           </ion-item-options>
         </ion-item-sliding>
       }
