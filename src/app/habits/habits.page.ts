@@ -65,6 +65,7 @@ export class HabitsPage {
     this.habitToBeAdded = new Habit(0, '', '', 0, 0, new Date(), '');
   }
 
+  // removes habit from the list and resaves the habits to local storage
   deleteHabit(id: number) {
     // filter out the habit with the id to be deleted
     this.habits = this.habits.filter(habit => habit.id !== id);
@@ -72,6 +73,7 @@ export class HabitsPage {
     localStorage.setItem('habits', JSON.stringify(this.habits));
   }
 
+  // opens the modal with information of the habit to be edited
   editHabit(id: number) {
     // set the isEditing to true
     this.isEditing = true;
@@ -83,9 +85,14 @@ export class HabitsPage {
     this.modal.present();
   }
 
+  // function to increment the current value of a habit
   incrementCurrent(id: number){
     // get the habit to be incremented
     let habit = this.habits.find(habit => habit.id === id) || new Habit(0, '', '', 0, 0, new Date(), '');
+    if (habit.current >= habit.goal) {
+      // do not increment if goal has been reached
+      return;
+    }
     // increment the current value
     habit.current++;
     // save the habits to local storage
