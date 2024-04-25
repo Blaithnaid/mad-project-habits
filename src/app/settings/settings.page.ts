@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonLabel, IonToggle, IonSelect, IonSelectOption, IonButton, IonAlert } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonLabel, IonToggle, IonSelect, IonSelectOption, IonButton, IonAlert, IonNote } from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
 import { Habit } from '../habits/habit.model';
 
@@ -8,7 +8,7 @@ import { Habit } from '../habits/habit.model';
   templateUrl: 'settings.page.html',
   styleUrls: ['settings.page.scss'],
   standalone: true,
-  imports: [IonAlert, IonButton, IonToggle, IonLabel, IonItem, IonList, IonHeader, IonToolbar, IonTitle, IonContent, IonSelect, IonSelectOption, FormsModule],
+  imports: [IonNote, IonAlert, IonButton, IonToggle, IonLabel, IonItem, IonList, IonHeader, IonToolbar, IonTitle, IonContent, IonSelect, IonSelectOption, FormsModule],
 })
 export class SettingsPage {
   
@@ -65,6 +65,9 @@ export class SettingsPage {
     ];
     // save the habits to local storage
     localStorage.setItem('habits', JSON.stringify(dummyHabits));
+  }
 
+  toggleDarkMode() {
+    document.body.classList.toggle('dark');
   }
 }
