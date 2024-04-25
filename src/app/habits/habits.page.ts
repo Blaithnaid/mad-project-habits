@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonButtons, IonButton, IonModal, IonItem, IonLabel, IonInput, IonTextarea, IonSelect, IonSelectOption, ModalController, IonList, IonItemSliding, IonDatetimeButton, IonPopover, IonItemOptions, IonItemOption, IonIcon, IonAvatar, IonBadge } from '@ionic/angular/standalone';
 import { ViewWillEnter } from '@ionic/angular';
+import { Haptics, ImpactStyle } from '@capacitor/haptics';
 import { Habit } from './habit.model';
 
 @Component({
@@ -96,6 +97,10 @@ export class HabitsPage implements ViewWillEnter {
 
   // function to increment the current value of a habit
   incrementCurrent(id: number){
+    // haptic feedback
+    Haptics.impact({
+      style: ImpactStyle.Light
+    });
     // get the habit to be incremented
     let habit = this.habits.find(habit => habit.id === id) || new Habit(0, '', '', 0, 0, new Date(), '');
     if (habit.current >= habit.goal) {

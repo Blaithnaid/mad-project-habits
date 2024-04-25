@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
-import { QuotesAPIService } from './quotes-api.service';
 
 @Component({
   selector: 'app-root',
