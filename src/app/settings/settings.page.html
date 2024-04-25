@@ -1,15 +1,41 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Settings
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+<ion-content>
+  <ion-header [translucent]="true">
     <ion-toolbar>
-      <ion-title size="large">Settings page</ion-title>
+      <ion-title>
+        Settings
+      </ion-title>
     </ion-toolbar>
   </ion-header>
+  <ion-list>
+    <!-- item to clear all data -->
+    <ion-item button id="clear-habits-alert">
+      <ion-label>Clear All Data</ion-label>
+    </ion-item>
+    <ion-alert trigger="clear-habits-alert" header="Are you sure?"
+      message="This will delete all habits from the app. This operation cannot be undone."
+      [buttons]="clearHabitsAlertButtons">
+    </ion-alert>
+    <ion-item button id="import-dummy-habits">
+      <ion-label>Import Dummy Habits</ion-label>
+    </ion-item>
+    <ion-alert trigger="import-dummy-habits" header="Are you sure?"
+      message="This will replace all habits in the app with debug data. All other habits will be lost. This operation cannot be undone."
+      [buttons]="importDummyHabitsAlertButtons"></ion-alert>
+    <ion-item>
+      <ion-label>Dark Mode</ion-label>
+      <ion-toggle></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Notifications</ion-label>
+      <ion-toggle></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Language</ion-label>
+      <ion-select>
+        <ion-select-option value="en">English</ion-select-option>
+        <ion-select-option value="fr">French</ion-select-option>
+        <ion-select-option value="es">Spanish</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
 </ion-content>
