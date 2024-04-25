@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonButtons, IonButton, IonModal, IonItem, IonLabel, IonInput, IonTextarea, IonSelect, IonSelectOption, ModalController, IonList, IonItemSliding, IonDatetimeButton, IonPopover, IonItemOptions, IonItemOption, IonIcon, IonAvatar } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonButtons, IonButton, IonModal, IonItem, IonLabel, IonInput, IonTextarea, IonSelect, IonSelectOption, ModalController, IonList, IonItemSliding, IonDatetimeButton, IonPopover, IonItemOptions, IonItemOption, IonIcon, IonAvatar, IonBadge } from '@ionic/angular/standalone';
 import { Habit } from './habit.model';
 
 @Component({
@@ -8,7 +8,7 @@ import { Habit } from './habit.model';
   templateUrl: 'habits.page.html',
   styleUrls: ['habits.page.scss'],
   standalone: true,
-  imports: [IonAvatar, IonIcon, IonItemOption, IonItemOptions, IonPopover, IonDatetimeButton, IonItemSliding, IonList, FormsModule, IonTextarea, IonInput, IonModal, IonButton, IonButtons, IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonLabel, IonSelect, IonSelectOption]
+  imports: [IonBadge, IonAvatar, IonIcon, IonItemOption, IonItemOptions, IonPopover, IonDatetimeButton, IonItemSliding, IonList, FormsModule, IonTextarea, IonInput, IonModal, IonButton, IonButtons, IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonLabel, IonSelect, IonSelectOption]
 })
 export class HabitsPage {
   @ViewChild(IonModal) modal: IonModal; // get the modal component
@@ -81,6 +81,15 @@ export class HabitsPage {
     this.habitToBeAdded = habit || new Habit(0, '', '', 0, 0, new Date(), '');
     // open the modal
     this.modal.present();
+  }
+
+  incrementCurrent(id: number){
+    // get the habit to be incremented
+    let habit = this.habits.find(habit => habit.id === id) || new Habit(0, '', '', 0, 0, new Date(), '');
+    // increment the current value
+    habit.current++;
+    // save the habits to local storage
+    localStorage.setItem('habits', JSON.stringify(this.habits));
   }
   constructor() {
     // get the habits from local storage, else set to empty array
