@@ -4,10 +4,15 @@
     <ion-buttons slot="primary" (click)="openNewModal()">
       <ion-button> New </ion-button>
     </ion-buttons>
+    <ion-buttons slot="secondary">
+      <ion-button>
+        <ion-button> Filter </ion-button>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
-  <ion-modal trigger="open-create-habit">
+  <ion-modal>
     <ng-template>
       <ion-header>
         <ion-toolbar>
