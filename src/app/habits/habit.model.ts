@@ -3,8 +3,8 @@ export class Habit {
     name: string;
     description: string;
     goal: number;
-    category: string;
     current: number;
+    category: string;
     deadline: Date;
     constructor(id: number, name: string, description: string, goal: number, current: number, deadline: Date, category: string) {
         this.id = id;
