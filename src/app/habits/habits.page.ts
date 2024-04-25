@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { IonHeader, IonToolbar, IonTitle, IonContent, IonButtons, IonButton, IonModal, IonItem, IonLabel, IonInput, IonTextarea, IonSelect, IonSelectOption, ModalController, IonList, IonItemSliding, IonDatetimeButton, IonPopover, IonItemOptions, IonItemOption, IonIcon, IonAvatar, IonBadge } from '@ionic/angular/standalone';
+import { ViewWillEnter } from '@ionic/angular';
 import { Habit } from './habit.model';
 
 @Component({
@@ -10,8 +11,16 @@ import { Habit } from './habit.model';
   standalone: true,
   imports: [IonBadge, IonAvatar, IonIcon, IonItemOption, IonItemOptions, IonPopover, IonDatetimeButton, IonItemSliding, IonList, FormsModule, IonTextarea, IonInput, IonModal, IonButton, IonButtons, IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonLabel, IonSelect, IonSelectOption]
 })
-export class HabitsPage {
+export class HabitsPage implements ViewWillEnter {
   @ViewChild(IonModal) modal: IonModal; // get the modal component
+
+  // function to run when the page is entered
+  ionViewWillEnter() {
+    // get the habits from local storage, else set to empty array
+    let habits = localStorage.getItem('habits') || '[]';
+    // parse the habits to an array of habit objects
+    this.habits = JSON.parse(habits);
+  }
 
   habits: Habit[] = []; // array of habits
 
@@ -101,13 +110,6 @@ export class HabitsPage {
   constructor() {
     // get the habits from local storage, else set to empty array
     // let habits = localStorage.getItem('habits') || '[]';
-  }
-
-  ngOnInit() {
-    // get the habits from local storage, else set to empty array
-    let habits = localStorage.getItem('habits') || '[]';
-    // parse the habits to JSON and set to the habits array
-    this.habits = JSON.parse(habits);
   }
 
 }
